@@ -83,6 +83,7 @@ if (window.localStorage.getItem("Author Name")) {
       
       }), 1000)
   }
+  getMessages()
   darkTheme.onclick = () => {
     if (darkTheme.checked) {
       window.localStorage.setItem("Theme Style", "black");
@@ -133,40 +134,7 @@ if (!window.localStorage.getItem("Author Name")) {
   darkTheme.style.display = "inline-block";
   darkTheme.style.marginLeft = "15px";
   document.getElementById("autofication").appendChild(darkTheme);
-  function getMessages ()  {
-    var id = 0 
-    fetch('http://localhost:3000/comments').then(response => response.json()).then(myJSON => {
-    id = myJSON[myJSON.length - 1].id  
-    for(var i = 0; i < myJSON.length; i++){
-        var div = document.createElement("div")
-        div.style.color = "white"
-        div.style.backgroundColor = "#3d3d3b"
-        div.style.padding = "20px"
-        div.style.border = "2px solid #82817f"
-        div.style.marginBottom = "15px"
-        div.style.borderRadius = "20px"
-        div.innerText = `Author :   ${myJSON[i].author}    Message:   ${myJSON[i].message}`
-        document.getElementById("app").appendChild(div)
-      }
-    
-    })
-    setInterval(fetch(`http://localhost:3000/comments/?start=${id}`).then(response => response.json()).then(myJSON => {
-      id = myJSON[myJSON.length - 1].id  
-      for(var i = 0; i < myJSON.length; i++){
-          var div = document.createElement("div")
-          div.style.color = "white"
-          div.style.backgroundColor = "#3d3d3b"
-          div.style.padding = "20px"
-          div.style.border = "2px solid #82817f"
-          div.style.marginBottom = "15px"
-          div.style.borderRadius = "20px"
-          div.innerText = `Author :   ${myJSON[i].author}    Message:   ${myJSON[i].message}`
-          document.getElementById("app").appendChild(div)
-        }
-      
-      }), 1000)
-  }
-  getMessages()
+  
   darkTheme.onclick = () => {
     if (darkTheme.checked) {
       window.localStorage.setItem("Theme Style", "black");
@@ -228,6 +196,40 @@ if (!window.localStorage.getItem("Author Name")) {
     darkTheme.style.display = "inline-block";
     darkTheme.style.marginLeft = "15px";
     document.getElementById("app").appendChild(darkTheme);
+    function getMessages ()  {
+      var id = 0 
+      fetch('http://localhost:3000/comments').then(response => response.json()).then(myJSON => {
+      id = myJSON[myJSON.length - 1].id  
+      for(var i = 0; i < myJSON.length; i++){
+          var div = document.createElement("div")
+          div.style.color = "white"
+          div.style.backgroundColor = "#3d3d3b"
+          div.style.padding = "20px"
+          div.style.border = "2px solid #82817f"
+          div.style.marginBottom = "15px"
+          div.style.borderRadius = "20px"
+          div.innerText = `Author :   ${myJSON[i].author}    Message:   ${myJSON[i].message}`
+          document.getElementById("app").appendChild(div)
+        }
+      
+      })
+      setInterval(fetch(`http://localhost:3000/comments/?start=${id}`).then(response => response.json()).then(myJSON => {
+        id = myJSON[myJSON.length - 1].id  
+        for(var i = 0; i < myJSON.length; i++){
+            var div = document.createElement("div")
+            div.style.color = "white"
+            div.style.backgroundColor = "#3d3d3b"
+            div.style.padding = "20px"
+            div.style.border = "2px solid #82817f"
+            div.style.marginBottom = "15px"
+            div.style.borderRadius = "20px"
+            div.innerText = `Author :   ${myJSON[i].author}    Message:   ${myJSON[i].message}`
+            document.getElementById("app").appendChild(div)
+          }
+        
+        }), 1000)
+    }
+    getMessages()
     darkTheme.onclick = () => {
       if (darkTheme.checked) {
         window.localStorage.setItem("Theme Style", "black");
